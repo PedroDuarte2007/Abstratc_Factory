@@ -7,7 +7,7 @@ class SistemaOperacionalFactory {
     }
 }
 
-// Fábrica concreta para Android
+// Subclasse concreta para Android
 class AndroidFactory extends SistemaOperacionalFactory {
     criarSistemaOperacional() {
         return {
@@ -17,7 +17,7 @@ class AndroidFactory extends SistemaOperacionalFactory {
     }
 }
 
-// Fábrica concreta para iOS
+// Subclasse concreta para iOS
 class IosFactory extends SistemaOperacionalFactory {
     criarSistemaOperacional() {
         return {
@@ -27,7 +27,7 @@ class IosFactory extends SistemaOperacionalFactory {
     }
 }
 
-// Fábrica concreta para Windows
+// Subclasse concreta para Windows
 class WindowsFactory extends SistemaOperacionalFactory {
     criarSistemaOperacional() {
         return {

@@ -17,66 +17,62 @@ O padrão Abstract Factory Method é uma variação do padrão Factory Method qu
 ## Exemplo de implementação do padrão Abstract Factory Method em JavaScript
 
 ```js
-// Interfaces (em JS usamos classes base)
-class Cadeira {
-  sentar() {
-    throw new Error("Método 'sentar()' deve ser implementado.");
-  }
-}
-
-class Sofa {
-  deitar() {
-    throw new Error("Método 'deitar()' deve ser implementado.");
-  }
-}
-
-// Implementações concretas
-class CadeiraModerna extends Cadeira {
-  sentar() {
-    console.log("Sentando em uma cadeira moderna");
-  }
-}
-
-class SofaModerno extends Sofa {
-  deitar() {
-    console.log("Deitando em um sofá moderno");
-  }
-}
+/** Exemplo do Gof pattern Abstract Factory */
 
 // Fábrica abstrata
-class FabricaDeMoveis {
-  criarCadeira() {
-    throw new Error("Método 'criarCadeira()' deve ser implementado.");
-  }
-
-  criarSofa() {
-    throw new Error("Método 'criarSofa()' deve ser implementado.");
-  }
+class SistemaOperacionalFactory {
+    criarSistemaOperacional() {
+        throw new Error("Este método deve ser implementado pelas subclasses.");
+    }
 }
 
-// Fábrica concreta
-class FabricaModerna extends FabricaDeMoveis {
-  criarCadeira() {
-    return new CadeiraModerna();
-  }
-
-  criarSofa() {
-    return new SofaModerno();
-  }
+// Subclasse concreta para Android
+class AndroidFactory extends SistemaOperacionalFactory {
+    criarSistemaOperacional() {
+        return {
+            nome: "Android",
+            tipo: "O mais poderoso SO."
+        };
+    }
 }
 
-// Cliente
-function cliente() {
-  const fabrica = new FabricaModerna();
-  const cadeira = fabrica.criarCadeira();
-  const sofa = fabrica.criarSofa();
-
-  cadeira.sentar();
-  sofa.deitar();
+// Subclasse concreta para iOS
+class IosFactory extends SistemaOperacionalFactory {
+    criarSistemaOperacional() {
+        return {
+            nome: "iOS",
+            tipo: "O mais seguro SO."
+        };
+    }
 }
 
-// Executar o cliente
-cliente();
+// Subclasse concreta para Windows
+class WindowsFactory extends SistemaOperacionalFactory {
+    criarSistemaOperacional() {
+        return {
+            nome: "Windows",
+            tipo: "Cópia piorada do MAC."
+        };
+    }
+}
+
+// Cliente que usa a fábrica abstrata
+function getFactory(tipo) {
+    switch (tipo) {
+        case "aberto":
+            return new AndroidFactory();
+        case "fechado":
+            return new IosFactory();
+        default:
+            return new WindowsFactory();
+    }
+}
+
+function getObjeto() {
+    const factory = getFactory(so.value); // Obtém a fábrica com base no tipo
+    const obj = factory.criarSistemaOperacional(); // Cria o objeto usando a fábrica
+    resultado.innerHTML += JSON.stringify(obj);
+}
 ```
 
 ## Imagem de exemplo do padrão Abstract Factory Method
